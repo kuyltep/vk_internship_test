@@ -14,6 +14,7 @@ const HomePage = () => {
               kp={item.rating.kp}
               title={item.name}
               year={item.year}
+              id={item.id}
             />
           );
         })}
