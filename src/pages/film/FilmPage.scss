@@ -1,0 +1,51 @@
+.film-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+  &__img {
+    width: 400px;
+    height: 640px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 25px;
+  }
+  &__button {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 10px 0;
+    background-color: transparent;
+    transition: all 0.4s ease-in-out;
+    border: 2px solid rgba(230, 155, 16, 0.915);
+    &:hover {
+      border: 2px solid rgba(230, 155, 16, 0.915);
+      background: rgba(230, 155, 16, 0.915);
+      transform: scale(1.03);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .no-img {
+    width: 400px;
+    height: 640px;
+    border-radius: 15px;
+    background-color: rgb(77, 77, 77);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .image-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 15px;
+  }
+}
