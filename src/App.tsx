@@ -1,24 +1,17 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import FilmCard from "./components/FilmCard/FilmCard";
-import { data } from "./moks.js";
+import HomePage from "./pages/home/HomePage";
+import FilmPage from "./pages/film/FilmPage";
+
 const App = () => {
   return (
-    <div className="films-page">
-      <ul className="films-list">
-        {data.docs.map((item, index) => {
-          return (
-            <FilmCard
-              key={item.id}
-              imdb={item.rating.imdb}
-              img={item.poster?.url || ""}
-              kp={item.rating.kp}
-              title={item.name}
-              year={item.year}
-            />
-          );
-        })}
-      </ul>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<HomePage />} path="/" />
+        <Route element={<FilmPage />} path="/film/:filmId" />
+        <Route element={<HomePage />} path="/favourites" />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
