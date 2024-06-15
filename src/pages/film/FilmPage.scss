@@ -56,3 +56,15 @@
   align-items: start;
   padding-left: 20px;
 }
+
+@media (max-width: 960px) {
+  .film-page {
+    display: block;
+  }
+  .image-section {
+    margin-bottom: 50px;
+  }
+  .description-section {
+    padding-left: 0;
+  }
+}

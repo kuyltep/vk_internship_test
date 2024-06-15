@@ -3,6 +3,7 @@
     margin-bottom: 15px;
     font-size: 26px;
     font-weight: 500;
+    text-align: left;
   }
   &__helper {
     font-size: 26px;
@@ -17,6 +18,7 @@
     font-size: 22px;
     font-weight: 500;
     margin-bottom: 15px;
+    text-align: left;
   }
   &__raiting-title {
     font-size: 26px;
@@ -47,5 +49,116 @@
     font-size: 18px;
     font-weight: 500;
     margin: 0 5px;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1150px) {
+  .film {
+    &__title {
+      margin-bottom: 15px;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    &__helper {
+      font-size: 22px;
+      color: rgb(154, 153, 153);
+      transition: all 0.4s ease-in-out;
+      &:hover {
+        color: orange;
+        cursor: default;
+      }
+    }
+    &__description {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    &__raiting-title {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    &__raiting {
+      .film__helper {
+        font-size: 18px;
+      }
+      margin-bottom: 10px;
+    }
+    &__raiting-score {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 500;
+      margin-left: 10px;
+    }
+    &__year {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    &__genres {
+      font-weight: 500;
+    }
+    &__genre {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 5px;
+    }
+  }
+}
+
+@media (max-width: 565px) {
+  .film-page__title {
+    font-size: 18px;
+  }
+  .film {
+    &__title {
+      margin-bottom: 15px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    &__helper {
+      font-size: 14px;
+      color: rgb(154, 153, 153);
+      transition: all 0.4s ease-in-out;
+      &:hover {
+        color: orange;
+        cursor: default;
+      }
+    }
+    &__description {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    &__raiting-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    &__raiting {
+      .film__helper {
+        font-size: 14px;
+      }
+      margin-bottom: 10px;
+    }
+    &__raiting-score {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-left: 10px;
+    }
+    &__year {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    &__genres {
+      font-weight: 500;
+    }
+    &__genre {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 5px;
+    }
   }
 }
