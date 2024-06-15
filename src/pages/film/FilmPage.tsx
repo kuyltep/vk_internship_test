@@ -4,13 +4,15 @@ import "./FilmPage.scss";
 import FilmDescription from "../../components/FilmDescription/FilmDescription.js";
 import Header from "../../components/Header/Header.js";
 import { postFavouritesFilms } from "../../hooks/usePostFavouritesFilms.js";
-import { useFilmInFavourites } from "../../hooks/useIsFilmInFavourites.js";
-const FilmPage = () => {
+import { isFilmInFavourites } from "../../hooks/useIsFilmInFavourites.js";
+import { store } from "../../store/store.js";
+import { observer } from "mobx-react";
+import { useGetFavouritesFilms } from "../../hooks/useGetFavouritesFilms.js";
+const FilmPage = observer(() => {
   const filmData = data.docs[0];
-  const isFilmInFavourites = useFilmInFavourites(filmData.id);
-  console.log(isFilmInFavourites);
-  console.log(filmData);
   const { filmId } = useParams();
+  useGetFavouritesFilms();
+  isFilmInFavourites(filmData.id);
   return (
     <>
       <Header />
@@ -21,14 +23,25 @@ const FilmPage = () => {
           ) : (
             <div className="no-img">No image</div>
           )}
-          <button
-            className={"film-page__button"}
-            onClick={() => {
-              postFavouritesFilms(filmData);
-            }}
-          >
-            Добавить в избранное
-          </button>
+          {store.isFilmInFavourites ? (
+            <button
+              className={"film-page__button_active"}
+              onClick={() => {
+                postFavouritesFilms(filmData);
+              }}
+            >
+              Удалить из избранного
+            </button>
+          ) : (
+            <button
+              className={"film-page__button"}
+              onClick={() => {
+                postFavouritesFilms(filmData);
+              }}
+            >
+              Добавить в избранное
+            </button>
+          )}
         </div>
         <div className="description-section">
           <FilmDescription
@@ -43,6 +56,6 @@ const FilmPage = () => {
       </div>
     </>
   );
-};
+});
 
 export default FilmPage;

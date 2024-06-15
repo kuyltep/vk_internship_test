@@ -1,9 +1,11 @@
+import { store } from "../store/store";
 import { jsonServer } from "../utils/axios/jsonServer";
 
 export const useGetFavouritesFilms = () => {
-  const data = jsonServer
+  jsonServer
     .get("favourites/")
-    .then((response) => response.data)
+    .then((response) => {
+      store.setFavouritesFilms(response.data);
+    })
     .catch((error) => console.log(error));
-  return data;
 };

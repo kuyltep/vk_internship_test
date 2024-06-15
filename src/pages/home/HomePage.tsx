@@ -1,28 +1,14 @@
-import FilmCard from "../../components/FilmCard/FilmCard.tsx";
+import FilmsSection from "../../components/FilmsSection/FilmsSection.tsx";
 import Header from "../../components/Header/Header.tsx";
 import { data } from "../../moks.js";
+import { store } from "../../store/store.ts";
 import "./HomePage.scss";
 const HomePage = () => {
+  console.log(store.favourites);
   return (
     <>
       <Header />
-      <div className="films-page">
-        <ul className="films-list">
-          {data.docs.map((item) => {
-            return (
-              <FilmCard
-                key={item.id}
-                imdb={item.rating.imdb}
-                img={item.poster?.url || ""}
-                kp={item.rating.kp}
-                title={item.name}
-                year={item.year}
-                id={item.id}
-              />
-            );
-          })}
-        </ul>
-      </div>
+      <FilmsSection data={data.docs} />
     </>
   );
 };

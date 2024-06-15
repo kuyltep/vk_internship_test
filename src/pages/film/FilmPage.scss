@@ -18,6 +18,7 @@
     background-color: transparent;
     transition: all 0.4s ease-in-out;
     border: 2px solid rgba(230, 155, 16, 0.915);
+
     &:hover {
       border: 2px solid rgba(230, 155, 16, 0.915);
       background: rgba(230, 155, 16, 0.915);
@@ -26,6 +27,17 @@
     &:focus {
       outline: none;
     }
+  }
+  &__button_active {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 10px 0;
+    background-color: transparent;
+    transition: all 0.4s ease-in-out;
+    border: 2px solid rgba(230, 155, 16, 0.915);
+    background: rgba(230, 155, 16, 0.915);
   }
   .no-img {
     width: 400px;

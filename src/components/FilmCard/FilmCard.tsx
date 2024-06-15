@@ -3,7 +3,7 @@ import "./FilmCard.scss";
 interface IProps {
   id: number;
   title: string;
-  year: string;
+  year: number;
   img: string;
   kp: number;
   imdb: number;
