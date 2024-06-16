@@ -10,7 +10,7 @@ interface IProps {
 }
 const FilmCard = ({ id, title, year, img, kp, imdb }: IProps) => {
   return (
-    <Link to={`film/${id}`}>
+    <Link to={`/film/${id}`}>
       <li className="film-card">
         {img.length ? (
           <img className="film-card__img" src={img} alt="" />

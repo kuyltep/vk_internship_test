@@ -3,7 +3,10 @@ import { IFilm } from "../types/IFilm";
 
 class Store {
   favourites: IFilm[] = [];
+  films: IFilm[] = [];
+  film: IFilm | object = {};
   currentFilmId: number = 0;
+  paginationPage: number = 1;
 
   constructor() {
     makeAutoObservable(this);
@@ -12,6 +15,14 @@ class Store {
     return computed(() =>
       this.favourites.some((item) => item.id === this.currentFilmId)
     );
+  }
+  setPaginationPage(num: number) {
+    if (num === -1 && this.paginationPage > 1) {
+      this.paginationPage += num;
+    }
+    if (num === 1) {
+      this.paginationPage += num;
+    }
   }
   setCurrentFilmId(id: number) {
     this.currentFilmId = id;
@@ -30,8 +41,11 @@ class Store {
       }
     });
   }
-  setIsFilmInFavourites(data: boolean) {
-    this.isFilmInFavourites = data;
+  setFilms(films: IFilm[]) {
+    this.films = films;
+  }
+  setFilm(film: IFilm) {
+    this.film = film;
   }
 }
 

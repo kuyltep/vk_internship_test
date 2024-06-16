@@ -1,9 +1,10 @@
+import { store } from "../store/store";
 import { instance } from "../utils/axios/intstance";
 
 export const useGetFilms = () => {
   instance
-    .get("movie?page=1&limit=50")
+    .get(`movie?page=${store.paginationPage}&limit=50`)
     .then((response) => response.data)
-    .then((data) => console.log(data))
+    .then((data) => store.setFilms(data))
     .catch((error) => console.log(error));
 };
