@@ -26,6 +26,7 @@
     }
     &:focus {
       outline: none;
+      border: none;
     }
   }
   &__button_active {
@@ -38,6 +39,10 @@
     transition: all 0.4s ease-in-out;
     border: 2px solid rgba(230, 155, 16, 0.915);
     background: rgba(230, 155, 16, 0.915);
+    &:focus {
+      outline: none;
+      border: none;
+    }
   }
   .no-img {
     width: 400px;
