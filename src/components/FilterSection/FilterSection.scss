@@ -23,4 +23,18 @@
       outline: none;
     }
   }
+  &__button {
+    outline: none;
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      outline: none;
+      background: orange;
+      border: none;
+    }
+    &:focus {
+      border: none;
+      outline: none;
+      background: orange;
+    }
+  }
 }

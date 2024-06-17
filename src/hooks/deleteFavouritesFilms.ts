@@ -1,7 +1,7 @@
 import { store } from "../store/store";
 import { IFilm } from "../types/IFilm";
 import { jsonServer } from "../utils/axios/jsonServer";
-import { useGetFavouritesFilms } from "./useGetFavouritesFilms";
+import { getFavouritesFilms } from "./useGetFavouritesFilms";
 
 export const deleteFavouritesFilms = (id: number) => {
   jsonServer
@@ -14,7 +14,7 @@ export const deleteFavouritesFilms = (id: number) => {
     })
     .then((favouriteId) => {
       jsonServer.delete(`/favourites/${favouriteId}`).then(() => {
-        useGetFavouritesFilms();
+        getFavouritesFilms();
         store.setCurrentFilmId(0);
       });
     })

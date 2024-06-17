@@ -4,13 +4,13 @@ import "./FilmPage.scss";
 import FilmDescription from "../../components/FilmDescription/FilmDescription.js";
 import Header from "../../components/Header/Header.js";
 import { observer } from "mobx-react";
-import { useGetFavouritesFilms } from "../../hooks/useGetFavouritesFilms.js";
+import { getFavouritesFilms } from "../../hooks/useGetFavouritesFilms.js";
 import FilmImageSection from "../../components/FilmCard/FilmImageSection/FilmImageSection.js";
 import { store } from "../../store/store.js";
-const FilmPage = observer(() => {
+const FilmPage = () => {
   const filmData = data.docs[0];
   const { filmId } = useParams();
-  useGetFavouritesFilms();
+  getFavouritesFilms();
   store.setCurrentFilmId(filmData.id);
   return (
     <>
@@ -32,6 +32,6 @@ const FilmPage = observer(() => {
       </div>
     </>
   );
-});
+};
 
 export default FilmPage;
