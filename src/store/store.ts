@@ -7,6 +7,9 @@ class Store {
   film: IFilm | object = {};
   currentFilmId: number = 0;
   paginationPage: number = 1;
+  genres: string[] = [];
+  years: string = "";
+  rating: string = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -29,6 +32,23 @@ class Store {
   }
   addFavouriteFilm(film: IFilm) {
     this.favourites.push(film);
+  }
+  setGenres(genres: string[]) {
+    this.genres = genres;
+  }
+  setYear(minYear: number, maxYear: number) {
+    if (minYear === maxYear) {
+      this.years = `${minYear}`;
+    } else {
+      this.years = `${minYear}-${maxYear}`;
+    }
+  }
+  setRating(minRating: number, maxRating: number) {
+    if (minRating.toFixed(2) === maxRating.toFixed(2)) {
+      this.rating = `${minRating}`;
+    } else {
+      this.rating = `${minRating}-${maxRating}`;
+    }
   }
   setFavouritesFilms(films: { id: string; body: IFilm }[]) {
     this.favourites = [];

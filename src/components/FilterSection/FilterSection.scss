@@ -38,3 +38,24 @@
     }
   }
 }
+
+.genre {
+  &__text {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  &__select {
+    margin-bottom: 40px;
+    padding: 15px 30px;
+    border: none;
+    background-color: rgba(101, 101, 101, 0.544);
+    &:focus {
+      border: none;
+      outline: none;
+    }
+    &:active {
+      border: none;
+      outline: none;
+    }
+  }
+}

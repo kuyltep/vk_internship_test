@@ -1,12 +1,15 @@
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./FilterSection.scss";
+import { genres } from "../../genres.js";
+import { store } from "../../store/store.js";
 
 const FilterSection = () => {
   const year = new Date().getFullYear();
-  const [minYear, setMinYear] = useState(1990);
-  const [maxYear, setMaxYear] = useState(year);
-  const [minRating, setMinRating] = useState(0);
-  const [maxRating, setMaxRating] = useState(10);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [minYear, setMinYear] = useState<number>(1990);
+  const [maxYear, setMaxYear] = useState<number>(year);
+  const [minRating, setMinRating] = useState<number>(0);
+  const [maxRating, setMaxRating] = useState<number>(10);
   const setYearFunct = (
     yearParam: number,
     setYear: React.Dispatch<React.SetStateAction<number>>
@@ -25,19 +28,45 @@ const FilterSection = () => {
   };
   return (
     <div className="filter__section">
-      <div className="filter_genre"></div>
+      <div className="filter__genre">
+        <p className="genre__text">Выбор жанров:</p>
+        <select
+          name=""
+          id=""
+          className="genre__select"
+          multiple
+          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+            const selectedOptions = e.target.selectedOptions;
+            const values = Array.from(selectedOptions).map(
+              (option) => option.value
+            );
+            setSelectedGenres(values);
+          }}
+        >
+          {genres.map((genre) => {
+            return (
+              <option key={genre.name} value={genre.name}>
+                {genre.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <div className="filter__rating">
         Рейтинг фильмов:
         <input
           value={minRating}
           type="number"
+          step={0.1}
           min={0}
           max={10}
           name=""
           id=""
           className="filter__input"
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setRatingFunct(+e.target.value, setMinRating);
+            if (+e.target.value <= maxRating) {
+              setRatingFunct(+e.target.value, setMinRating);
+            }
           }}
         />{" "}
         -
@@ -45,12 +74,15 @@ const FilterSection = () => {
           type="number"
           value={maxRating}
           min={0}
+          step={0.1}
           max={10}
           name=""
           id=""
           className="filter__input"
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setRatingFunct(+e.target.value, setMaxRating);
+            if (+e.target.value >= minRating) {
+              setRatingFunct(+e.target.value, setMaxRating);
+            }
           }}
         />
       </div>
@@ -65,8 +97,9 @@ const FilterSection = () => {
           id=""
           className="filter__input"
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setYearFunct(+e.target.value, setMinYear);
-            console.log(e.target.value);
+            if (+e.target.value <= maxYear) {
+              setYearFunct(+e.target.value, setMinYear);
+            }
           }}
         />
         -
@@ -79,7 +112,9 @@ const FilterSection = () => {
           id=""
           className="filter__input"
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setYearFunct(+e.target.value, setMaxYear);
+            if (+e.target.value >= minYear) {
+              setYearFunct(+e.target.value, setMaxYear);
+            }
           }}
         />
       </div>
@@ -87,6 +122,9 @@ const FilterSection = () => {
         className="filter__button"
         onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           e.preventDefault();
+          store.setGenres(selectedGenres);
+          store.setRating(minRating, maxRating);
+          store.setYear(minYear, maxYear);
         }}
       >
         Фильтровать
