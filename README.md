@@ -1,30 +1,28 @@
-# React + TypeScript + Vite
+# Фильмы и сериалы
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Этот проект представляет собой приложение для просмотра информации о фильмах и сериалах.
 
-Currently, two official plugins are available:
+## Начало работы
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Эти инструкции помогут вам запустить копию проекта на вашем локальном компьютере для разработки и тестирования.
 
-## Expanding the ESLint configuration
+### Предварительные требования
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Перед началом работы убедитесь, что у вас установлены следующие инструменты:
 
-- Configure the top-level `parserOptions` property like this:
+- Git
+- Node.js
+- npm
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Установка
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Для установки проекта выполните следующие шаги:
+
+1. Клонирование репозитория:
+   git clone https://github.com/kuyltep/vk_internship_test.git
+2. Установка зависимостей:
+   npm install
+3. Запуск json-server для работы с избранными фильмами и сериалами:
+   json-server -p 3200 db.json
+4. Запуск проекта:
+   npm run dev
