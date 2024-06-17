@@ -1,7 +1,6 @@
 import { observer } from "mobx-react";
 import { store } from "../../store/store";
 import "./PaginationSection.scss";
-import { getFilms } from "../../hooks/getFilms";
 const PaginationSection = observer(() => {
   return (
     <div className="pagination__section">
@@ -16,7 +15,6 @@ const PaginationSection = observer(() => {
         className="pagination__button"
         onClick={() => {
           store.setPaginationPage(1);
-          getFilms();
         }}
       >
         Следующая

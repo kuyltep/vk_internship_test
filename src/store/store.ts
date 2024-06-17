@@ -1,6 +1,7 @@
 import { computed, makeAutoObservable } from "mobx";
 import { IFilm } from "../types/IFilm";
 import { IGenre } from "../types/IGenre";
+import { getFilms } from "../hooks/getFilms";
 
 class Store {
   favourites: IFilm[] = [];
@@ -60,6 +61,7 @@ class Store {
   years: string = "";
   rating: string = "";
   genresOptions: IGenre[] = [];
+  pages: number = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -69,12 +71,17 @@ class Store {
       this.favourites.some((item) => item.id === +this.currentFilmId)
     );
   }
+  setPages(pages: number) {
+    this.pages = pages;
+  }
   setPaginationPage(num: number) {
     if (num === -1 && this.paginationPage > 1) {
       this.paginationPage += num;
+      getFilms();
     }
-    if (num === 1) {
+    if (num === 1 && this.paginationPage + 1 <= this.pages) {
       this.paginationPage += num;
+      getFilms();
     }
   }
   setCurrentFilmId(id: string) {

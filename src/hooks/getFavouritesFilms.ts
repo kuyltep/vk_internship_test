@@ -7,7 +7,6 @@ export const getFavouritesFilms = action(() => {
     .get("favourites/")
     .then((response) => {
       store.setFavouritesFilms(response.data);
-      console.log(store.favourites);
     })
     .catch((error) => console.log(error));
 });

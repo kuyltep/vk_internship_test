@@ -10,11 +10,11 @@ import { useEffect } from "react";
 import { getFilmById } from "../../hooks/getFilmById.js";
 const FilmPage = observer(() => {
   const { filmId } = useParams();
-  store.setCurrentFilmId(filmId || "");
   useEffect(() => {
+    store.setCurrentFilmId(filmId || "");
     getFavouritesFilms();
-    getFilmById(filmId);
-  });
+    getFilmById(store.currentFilmId);
+  }, [store.currentFilmId]);
   const filmData = store.film;
   return (
     <>
