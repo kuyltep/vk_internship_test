@@ -1,9 +1,11 @@
 import { ChangeEvent, useState } from "react";
 import "./FilterSection.scss";
-import { genres } from "../../genres.js";
 import { store } from "../../store/store.js";
+import { getFilms } from "../../hooks/getFilms.js";
+import { observer } from "mobx-react";
+import React from "react";
 
-const FilterSection = () => {
+const FilterSection = observer(() => {
   const year = new Date().getFullYear();
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [minYear, setMinYear] = useState<number>(1990);
@@ -30,27 +32,31 @@ const FilterSection = () => {
     <div className="filter__section">
       <div className="filter__genre">
         <p className="genre__text">Выбор жанров:</p>
-        <select
-          name=""
-          id=""
-          className="genre__select"
-          multiple
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-            const selectedOptions = e.target.selectedOptions;
-            const values = Array.from(selectedOptions).map(
-              (option) => option.value
-            );
-            setSelectedGenres(values);
-          }}
-        >
-          {genres.map((genre) => {
-            return (
-              <option key={genre.name} value={genre.name}>
-                {genre.name}
-              </option>
-            );
-          })}
-        </select>
+        {store.genresOptions.length ? (
+          <select
+            name=""
+            id=""
+            className="genre__select"
+            multiple
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              const selectedOptions = e.target.selectedOptions;
+              const values = Array.from(selectedOptions).map(
+                (option) => option.value
+              );
+              setSelectedGenres(values);
+            }}
+          >
+            {store.genresOptions.map((genre) => {
+              return (
+                <option key={genre.name} value={genre.name}>
+                  {genre.name}
+                </option>
+              );
+            })}
+          </select>
+        ) : (
+          <p>Загрузка жанров...</p>
+        )}
       </div>
       <div className="filter__rating">
         Рейтинг фильмов:
@@ -125,12 +131,13 @@ const FilterSection = () => {
           store.setGenres(selectedGenres);
           store.setRating(minRating, maxRating);
           store.setYear(minYear, maxYear);
+          getFilms();
         }}
       >
         Фильтровать
       </button>
     </div>
   );
-};
+});
 
 export default FilterSection;

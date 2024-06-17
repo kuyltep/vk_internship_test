@@ -1,37 +1,47 @@
 import { useParams } from "react-router-dom";
-import { data } from "../../moks.js";
 import "./FilmPage.scss";
 import FilmDescription from "../../components/FilmDescription/FilmDescription.js";
 import Header from "../../components/Header/Header.js";
 import { observer } from "mobx-react";
-import { getFavouritesFilms } from "../../hooks/useGetFavouritesFilms.js";
+import { getFavouritesFilms } from "../../hooks/getFavouritesFilms.js";
 import FilmImageSection from "../../components/FilmCard/FilmImageSection/FilmImageSection.js";
 import { store } from "../../store/store.js";
-const FilmPage = () => {
-  const filmData = data.docs[0];
+import { useEffect } from "react";
+import { getFilmById } from "../../hooks/getFilmById.js";
+const FilmPage = observer(() => {
   const { filmId } = useParams();
-  getFavouritesFilms();
-  store.setCurrentFilmId(filmData.id);
+  store.setCurrentFilmId(filmId || "");
+  useEffect(() => {
+    getFavouritesFilms();
+    getFilmById(filmId);
+  });
+  const filmData = store.film;
   return (
     <>
       <Header />
       <div className="film-page">
-        <div className="image-section">
-          <FilmImageSection filmData={filmData} />
-        </div>
-        <div className="description-section">
-          <FilmDescription
-            description={filmData.description}
-            genres={filmData.genres}
-            imdb={filmData.rating.imdb}
-            kp={filmData.rating.kp}
-            name={filmData.name}
-            year={filmData.year}
-          />
-        </div>
+        {filmData.name.length ? (
+          <>
+            <div className="image-section">
+              <FilmImageSection filmData={filmData} />
+            </div>
+            <div className="description-section">
+              <FilmDescription
+                description={filmData.description}
+                genres={filmData.genres}
+                imdb={filmData.rating.imdb}
+                kp={filmData.rating.kp}
+                name={filmData.name}
+                year={filmData.year}
+              />
+            </div>
+          </>
+        ) : (
+          <p>Загрузка фильма...</p>
+        )}
       </div>
     </>
   );
-};
+});
 
 export default FilmPage;

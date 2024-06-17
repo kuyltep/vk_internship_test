@@ -1,11 +1,11 @@
 import "./FilmDescription.scss";
 interface IProps {
   name: string;
-  description: string;
+  description: string | null | undefined;
   kp: number;
   imdb: number;
   year: number;
-  genres: { name: string }[];
+  genres: { name: string }[] | undefined;
 }
 const FilmDescription = ({
   name,

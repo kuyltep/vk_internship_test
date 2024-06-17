@@ -1,22 +1,72 @@
 import { computed, makeAutoObservable } from "mobx";
 import { IFilm } from "../types/IFilm";
+import { IGenre } from "../types/IGenre";
 
 class Store {
   favourites: IFilm[] = [];
   films: IFilm[] = [];
-  film: IFilm | object = {};
-  currentFilmId: number = 0;
+  film: IFilm = {
+    id: 0,
+    name: "",
+    alternativeName: "",
+    enName: "",
+    type: "",
+    typeNumber: 0,
+    year: 0,
+    description: "",
+    shortDescription: "",
+    status: "",
+    rating: {
+      kp: 0,
+      imdb: 0,
+      filmCritics: 0,
+      russianFilmCritics: 0,
+      await: 0,
+    },
+    votes: {
+      kp: 0,
+      imdb: 0,
+      filmCritics: 0,
+      russianFilmCritics: 0,
+      await: 0,
+    },
+    movieLength: 0,
+    totalSeriesLength: 0,
+    seriesLength: 0,
+    ratingMpaa: 0,
+    ageRating: 0,
+    poster: {
+      url: "",
+      previewUrl: "",
+    },
+    genres: [
+      {
+        name: "",
+      },
+    ],
+    countries: [
+      {
+        name: "",
+      },
+    ],
+    top10: false,
+    top250: false,
+    isSeries: false,
+    ticketsOnSale: false,
+  };
+  currentFilmId: string = "";
   paginationPage: number = 1;
   genres: string[] = [];
   years: string = "";
   rating: string = "";
+  genresOptions: IGenre[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
   get isFilmInFavourites() {
     return computed(() =>
-      this.favourites.some((item) => item.id === this.currentFilmId)
+      this.favourites.some((item) => item.id === +this.currentFilmId)
     );
   }
   setPaginationPage(num: number) {
@@ -27,7 +77,7 @@ class Store {
       this.paginationPage += num;
     }
   }
-  setCurrentFilmId(id: number) {
+  setCurrentFilmId(id: string) {
     this.currentFilmId = id;
   }
   addFavouriteFilm(film: IFilm) {
@@ -35,6 +85,9 @@ class Store {
   }
   setGenres(genres: string[]) {
     this.genres = genres;
+  }
+  setGenresOptions(genres: IGenre[]) {
+    this.genresOptions = genres;
   }
   setYear(minYear: number, maxYear: number) {
     if (minYear === maxYear) {

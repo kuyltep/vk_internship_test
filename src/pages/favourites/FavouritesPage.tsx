@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import FilmsSection from "../../components/FilmsSection/FilmsSection";
 import Header from "../../components/Header/Header";
-import { getFavouritesFilms } from "../../hooks/useGetFavouritesFilms";
+import { getFavouritesFilms } from "../../hooks/getFavouritesFilms";
 import { store } from "../../store/store";
 import { useEffect } from "react";
 
